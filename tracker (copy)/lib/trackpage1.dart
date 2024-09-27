@@ -10,6 +10,7 @@ class ExpensePage1 extends StatefulWidget {
 
 class _ExpensePage1State extends State<ExpensePage1> {
   TextEditingController income = TextEditingController();
+  TextEditingController money=TextEditingController();
   final _track = Hive.box("myBox");
   int value = 0;
   List<dynamic> ls = [];
@@ -26,6 +27,7 @@ class _ExpensePage1State extends State<ExpensePage1> {
       if (_track.get("key") != null) {
         value = int.parse(_track.get("key"));
         value = value + int.parse(income.text);
+        _track.put("key", value.toString());
       } else {
         _track.put("key", income.text);
       }
@@ -46,24 +48,24 @@ class _ExpensePage1State extends State<ExpensePage1> {
     return Scaffold(
       backgroundColor: Colors.green[100],
       appBar: AppBar(
-        backgroundColor: Colors.green[100],
+        backgroundColor:Colors.green[100],
         title: Center(
             child: Text(
           "EXPENSE TRACKER",
           style: TextStyle(color: Colors.black),
         )),
         iconTheme: IconThemeData(color: Colors.black),
-        // actions: [
-        //   IconButton(
-        //       onPressed: () {
-        //         Navigator.pushNamed(context, "track2");
-        //       },
-        //       icon: Icon(
-        //         Icons.add,
-        //         color: Colors.black,
-        //         size: 40,
-        //       ))
-        // ],
+        actions: [
+          // IconButton(
+          //     onPressed: () {
+          //       Navigator.pushNamed(context, "track2");
+          //     },
+          //     icon: Icon(
+          //       Icons.add,
+          //       color: Colors.black,
+          //       size: 40,
+          //     ))
+        ],
       ),
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Container(
@@ -81,58 +83,72 @@ class _ExpensePage1State extends State<ExpensePage1> {
           width: 350,
           height: 200,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25),
-            color: Colors.green[50],
+            borderRadius: BorderRadius.circular(15),
+            boxShadow: [BoxShadow(blurRadius: 5,color: Colors.green)],
+            color:Colors.green[50],
+            
           ),
+          
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "₹",
-                    style: TextStyle(fontSize: 50, color:Colors.black),
-                  ),
+                //   Text("", style: TextStyle(fontSize: 50, color:Colors.black)),
+                //   SizedBox(width: 15,),
+                //  _track.get("3")==null? Text(
+                //     "",
+                //     style: TextStyle(fontSize: 50, color:Colors.black),
+                //   ):Text(_track.get("3"), style: TextStyle(fontSize: 50, color:Colors.black),),
                   SizedBox(
-                    width: 20,
+                    height: 10,
                   ),
-                  Text("Spent Money",
+                  Text("Expense  :",
                       style:
                           TextStyle(color:Colors.black, fontSize: 20)),
                 ],
               ),
+              SizedBox(height: 15,),
               Row(
                 children: [
-                  Text("Income", style: TextStyle( color:Colors.black)),
+                  SizedBox(height: 20,),
+                  Text("Income", style: TextStyle(color:Colors.black,fontSize: 20)),
                   SizedBox(
+                    width: 10,
+                  ),
+                  Text(":", style: TextStyle(fontSize: 20, color: Colors.black)),
+                   SizedBox(
                     width: 10,
                   ),
                   _track.get("key") == null
-                      ? Text("₹",
+                      ? Text("",
                           style: TextStyle(
-                               color:Colors.black, fontSize: 20))
+                             color:Colors.black, fontSize: 20))
                       : Text(_track.get("key"),
                           style: TextStyle(
-                               color:Colors.black, fontSize: 20))
+                              color:Colors.black, fontSize: 20))
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Center(
-                      child: Text("Balance",
-                          style: TextStyle(
-                              color:Colors.black, fontSize: 25))),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "₹",
-                    style: TextStyle(fontSize: 25,  color:Colors.black),
-                  ),
-                ],
-              ),
+              SizedBox(height: 20,),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.start,
+              //   children: [
+              //     SizedBox(width: 10,),
+
+              //     Center(
+              //         child: Text("Balance",
+              //             style: TextStyle(
+              //                 color:Colors.black, fontSize: 25))),
+              //     SizedBox(
+              //       width:2,
+              //     ),
+              //     Text(
+              //       ":",
+              //       style: TextStyle(fontSize: 25,color:Colors.black),
+              //     ),
+              //   ],
+              // ),
             ],
           ),
         ),
@@ -142,9 +158,9 @@ class _ExpensePage1State extends State<ExpensePage1> {
         Container(
             margin: EdgeInsets.only(top: 20, left: 50),
             child: Text(
-              "",
+              "View All ",
               style: TextStyle(
-                 color: Colors.black, fontSize: 20),
+                  color:Colors.black, fontSize: 20),
             )),
         SizedBox(
           height: 20,
@@ -156,33 +172,67 @@ class _ExpensePage1State extends State<ExpensePage1> {
                 return Container(
                   margin:
                       EdgeInsets.only(bottom: 10, top: 10, left: 50, right: 50),
-                  padding: EdgeInsets.all(15),
+                  padding: EdgeInsets.all(10),
                   width: MediaQuery.of(context).size.width,
-                  height: 90,
+                  height: 150,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      color: Colors.yellow[50],
+                      color: Colors.green[50],
                       boxShadow: [
-                        BoxShadow(blurRadius: 5, color: Colors.grey)
+                        BoxShadow(blurRadius: 5, color: Colors.green)
                       ]),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
-                        ls[index]["food"],
-                        style: TextStyle(
-                            color:Colors.green[100],
-                            fontSize: 20),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            ls[index]["food"],
+                            style: TextStyle(
+                                color:Colors.black,
+                                fontSize: 20),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            ls[index]["paid"],
+                            style: TextStyle(
+                                color:Colors.black,
+                                fontSize: 17),
+                          ),
+                        ],
                       ),
-                      SizedBox(
-                        height: 5,
+                      SizedBox(width: 40,),
+                      Column(
+                        children: [
+                          Text("Date",style: TextStyle(
+                                    color:Colors.black,
+                                    fontSize: 18), ),
+                                    SizedBox(height: 5,),
+                          Text(ls[index]["date"], style: TextStyle(
+                                    color:Colors.black,
+                                    fontSize: 17), ),
+                        ],
                       ),
-                      Text(
-                        ls[index]["paid"],
-                        style: TextStyle(
-                            color: const Color.fromARGB(255, 235, 184, 19),
-                            fontSize: 15),
-                      ),
+                      SizedBox(width: 45,),
+                                Column(
+                                  children: [
+                                    Text("Time", style: TextStyle(
+                                color:Colors.black,
+                                fontSize: 15), ),
+                                    SizedBox(height: 5,),
+                                    Text(ls[index]["time"], style: TextStyle(
+                                color:Colors.black,
+                                fontSize: 15), ),
+                                  ],
+                                ),
+                      SizedBox(width:25,),
+                                Text("₹",style: TextStyle(fontSize: 20,color:Colors.black,),),
+                                Text(ls[index]["money"], style: TextStyle(
+                               color:Colors.black,
+                                fontSize: 20), ),
                     ],
                   ),
                 );
@@ -198,7 +248,8 @@ class _ExpensePage1State extends State<ExpensePage1> {
                 child: Text(
                   "EXPENSE TRACKER",
                   style:
-                      TextStyle(color:Colors.green[100]),
+                      TextStyle(color:Colors.black,
+                      fontWeight: FontWeight.bold,fontSize: 17),
                 ),
               ),
             ),
@@ -206,10 +257,14 @@ class _ExpensePage1State extends State<ExpensePage1> {
               height: 30,
             ),
             Container(
+              height: 50,
+              width: 130,
               margin: EdgeInsets.only(left: 50, right: 50),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                color: Colors.green,
+                 boxShadow: [BoxShadow(blurRadius: 5,color: Colors.green)],
+            
+                color:Colors.green[800]
               ),
               child: TextButton(
                 onPressed: () {
@@ -218,26 +273,27 @@ class _ExpensePage1State extends State<ExpensePage1> {
                       builder: (BuildContext context) {
                         return AlertDialog(
                           backgroundColor:
-                             Colors.green[100],
+                            Colors.green[100],
                           title: Text(
                             "ADD INCOME",
                             style: TextStyle(
-                                color: Colors.black),
+                                color:Colors.black),
                           ),
                           content: Container(
-                            width: 260,
-                            height: 40,
+                            width: 250,
+                            height: 50,
                             padding: EdgeInsets.only(left: 20, right: 20),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color:Colors.green[50],
+                              borderRadius: BorderRadius.circular(15),
+                               boxShadow: [BoxShadow(blurRadius: 5,color: Colors.green)],
+                              color: Colors.green[50]
                             ),
                             child: TextField(
                               controller: income,
                               decoration: InputDecoration(
-                                  hintText: "Add Income (cash)",
+                                  hintText: "Add Income",
                                   hintStyle: TextStyle(
-                                    color: Colors.black,
+                                    color:Colors.black
                                   ),
                                   border: InputBorder.none),
                             ),
@@ -250,10 +306,12 @@ class _ExpensePage1State extends State<ExpensePage1> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Container(
+                                  height: 40,
+                                  width: 70,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    color:
-                                         Colors.green
+                                    boxShadow: [BoxShadow(blurRadius: 5,color: Colors.green)],
+                                   color:Colors.green[800],
                                   ),
                                   child: TextButton(
                                       onPressed: () {
@@ -266,10 +324,12 @@ class _ExpensePage1State extends State<ExpensePage1> {
                                       )),
                                 ),
                                 Container(
+                                  height: 40,
+                                  width: 70,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    color:
-                                      Colors.green
+                                     boxShadow: [BoxShadow(blurRadius: 5,color: Colors.green)],
+                                       color:Colors.green[800],
                                   ),
                                   child: TextButton(
                                       onPressed: addIncome,
@@ -288,26 +348,34 @@ class _ExpensePage1State extends State<ExpensePage1> {
                 child: Text(
                   "ADD INCOME",
                   style: TextStyle(
-                      color:Colors.black),
+                     color:Colors.white),
                 ),
               ),
             ),
             Container(
+               height: 50,
+              width: 130,
               margin: EdgeInsets.all(50),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color:Colors.green),
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.green[800]),
               child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, "track3");
+                  },
                   child: Text(
                     "STATEMENTS",
                     style: TextStyle(
-                        color: Colors.black),
+                        color:Colors.white),
                   )),
             ),
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(onPressed: (){
+         Navigator.pushNamed(context, "track2");
+
+      },child: Icon(Icons.add),),
     );
   }
 }
