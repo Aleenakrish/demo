@@ -16,11 +16,11 @@ class _ToDo2State extends State<ToDo2> {
     return Consumer<NumberListProvider>(
         builder: (context, TodoListModel, child) => Scaffold(
               appBar: AppBar(
-                backgroundColor: const Color.fromARGB(255, 122, 159, 221),
+                // backgroundColor: const Color.fromARGB(255, 122, 159, 221),
                 title: Center(
                     child: Text(
-                  "Add Tasks",
-                  style: TextStyle(color: Colors.white),
+                  "Add page",
+                  style: TextStyle(color: Colors.black),
                 )),
                 iconTheme: IconThemeData(color: Colors.white),
               ),
@@ -30,40 +30,46 @@ class _ToDo2State extends State<ToDo2> {
                     height: 20,
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
                         margin: EdgeInsets.all(10),
                         padding: EdgeInsets.all(10),
                         width: 300,
-                        height: 60,
+                        height: 75,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
+                            // color: Colors.white,
                             boxShadow: [
-                              BoxShadow(blurRadius: 5, color: Colors.grey)
+                              // BoxShadow(blurRadius: 5, color: Colors.grey)
                             ]),
                         child: TextField(
                           controller: add,
                           decoration: InputDecoration(
-                              hintText: "Add Tasks",
+                              hintText: "Add..",
                               hintStyle: TextStyle(
                                   color:
-                                      const Color.fromARGB(255, 122, 159, 221)),
-                              border: InputBorder.none),
+                                     Colors.black),
+                                      border: OutlineInputBorder(
+
+                                      )
+                              // border: InputBorder.none
+                              ),
                           style: TextStyle(
-                              color: const Color.fromARGB(255, 122, 159, 221)),
+                              color:Colors.black),
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.all(10),
+                       
+                        // margin: EdgeInsets.all(10),   
+
                         width: 70,
-                        height: 50,
+                        height: 80,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(blurRadius: 5, color: Colors.grey)
-                            ]),
+                            // color: Colors.white,
+                           ),
                         child: TextButton(
                             onPressed: () {
                               var task = add.text;
@@ -71,12 +77,16 @@ class _ToDo2State extends State<ToDo2> {
                               Navigator.pushNamedAndRemoveUntil(
                                   context, "/todo1", (route) => false);
                             },
-                            child: Text(
-                              "ADD",
-                              style: TextStyle(
-                                  color:
-                                      const Color.fromARGB(255, 122, 159, 221)),
-                            )),
+                            child: Icon(Icons.add,size: 25,
+                            color: Colors.black,
+                            )
+                            // Text(
+                            //   "ADD",
+                            //   style: TextStyle(
+                            //       color:
+                            //          Colors.black,fontSize: 18),
+                            // )
+                            ),
                       )
                     ],
                   ),

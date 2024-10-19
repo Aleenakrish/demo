@@ -18,13 +18,13 @@ class _ToDo3State extends State<ToDo3> {
     return Consumer<NumberListProvider>(
         builder: (context, TodoListModel, child) => Scaffold(
               appBar: AppBar(
-                backgroundColor: const Color.fromARGB(255, 122, 159, 221),
+                // backgroundColor: const Color.fromARGB(255, 122, 159, 221),
                 title: Center(
                     child: Text(
-                  "Edit Tasks",
-                  style: TextStyle(color: Colors.white),
+                  "Edit page",
+                  style: TextStyle(color: Colors.black),
                 )),
-                iconTheme: IconThemeData(color: Colors.white),
+                // iconTheme: IconThemeData(color: Colors.white),
               ),
               body: Column(
                 children: [
@@ -34,41 +34,39 @@ class _ToDo3State extends State<ToDo3> {
                   Row(
                     children: [
                       Container(
+                        // padding: EdgeInsets.only(left: 10),
                         margin: EdgeInsets.all(20),
                         padding: EdgeInsets.all(10),
                         width: 300,
-                        height: 60,
+                        height: 75,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(blurRadius: 5, color: Colors.grey)
-                            ]),
+                            ),
                         child: TextField(
                           onTap: () {
                             add.text = TodoListModel.ls[index!];
                           },
                           controller: add,
                           decoration: InputDecoration(
-                              hintText: "Edit Tasks",
+                              hintText: "Edit..",
                               hintStyle: TextStyle(
                                   color:
-                                      const Color.fromARGB(255, 122, 159, 221)),
-                              border: InputBorder.none),
+                                     Colors.black),
+                              // border: InputBorder.none
+                              border: OutlineInputBorder()
+                              ),
                           style: TextStyle(
-                              color: const Color.fromARGB(255, 122, 159, 221)),
+                              color:Colors.black),
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.all(10),
+                        padding: EdgeInsets.only(top: 2),
+                        // margin: EdgeInsets.all(10),
                         width: 70,
                         height: 60,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(blurRadius: 5, color: Colors.grey)
-                            ]),
+                           ),
                         child: TextButton(
                             onPressed: () {
                               TodoListModel.ls[index!] = add.text;
@@ -76,10 +74,10 @@ class _ToDo3State extends State<ToDo3> {
                                   context, "/todo1", (route) => false);
                             },
                             child: Text(
-                              "EDIT",
+                              "Edit",
                               style: TextStyle(
                                   color:
-                                      const Color.fromARGB(255, 122, 159, 221)),
+                                     Colors.black,fontSize: 20),
                             )),
                       )
                     ],

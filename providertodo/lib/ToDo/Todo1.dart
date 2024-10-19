@@ -23,11 +23,11 @@ class _ToDO1State extends State<ToDO1> {
     return Consumer<NumberListProvider>(
         builder: (context, TodoListModel, child) => Scaffold(
               appBar: AppBar(
-                backgroundColor: const Color.fromARGB(255, 122, 159, 221),
+                // backgroundColor: const Color.fromARGB(255, 122, 159, 221),
                 title: Center(
                     child: Text(
-                  "TODO LIST",
-                  style: TextStyle(color: Colors.white),
+                  "TODO",
+                  style: TextStyle(color: Colors.black),
                 )),
               ),
               body: Column(
@@ -47,10 +47,9 @@ class _ToDO1State extends State<ToDO1> {
                                     return AlertDialog(
                                       backgroundColor: Colors.white,
                                       title: Text(
-                                        "Do you want to Delete?",
+                                        "Delete?",
                                         style: TextStyle(
-                                          color: const Color.fromARGB(
-                                              255, 122, 159, 221),
+                                          color:Colors.black,
                                         ),
                                       ),
                                       actions: [
@@ -58,13 +57,9 @@ class _ToDO1State extends State<ToDO1> {
                                           onPressed: () {
                                             Navigator.pop(context);
                                           },
-                                          child: Text(
-                                            "Cancel",
-                                            style: TextStyle(
-                                              color: const Color.fromARGB(
-                                                  255, 122, 159, 221),
-                                            ),
-                                          ),
+                                          child:Text("Cancel",
+                                          style: TextStyle(color: Colors.black),
+                                          )
                                         ),
                                         TextButton(
                                             onPressed: () {
@@ -76,7 +71,7 @@ class _ToDO1State extends State<ToDO1> {
                                             },
                                             child: Text("Delete",
                                                 style: TextStyle(
-                                                    color: Colors.white)))
+                                                    color: Colors.black)))
                                       ],
                                     );
                                   });
@@ -86,9 +81,10 @@ class _ToDO1State extends State<ToDO1> {
                                   bottom: 10, top: 10, left: 20, right: 20),
                               padding: EdgeInsets.all(15),
                               width: MediaQuery.of(context).size.width * .10,
-                              height: 50,
+                              height: 60,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
+                                
                                 // // color: Colors.white,
                                 // boxShadow: [
                                 //   BoxShadow(blurRadius: 5, color: Colors.grey)
@@ -98,19 +94,15 @@ class _ToDO1State extends State<ToDO1> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text("${TodoListModel.ls[index]}"),
+                                  Text("${TodoListModel.ls[index]}",
+                                  style:TextStyle(fontSize: 18),),
                                   GestureDetector(
                                     child: GestureDetector(
                                       onTap: () {
                                         Navigator.pushNamed(context, "/todo3",
                                             arguments: index.toString());
                                       },
-                                      child: Text(
-                                        "EDIT",
-                                        style: TextStyle(
-                                            color: const Color.fromARGB(
-                                                255, 122, 159, 221)),
-                                      ),
+                                      child: Icon(Icons.mode_edit_rounded,size: 20,)
                                     ),
                                   ),
                                 ],
@@ -126,12 +118,8 @@ class _ToDO1State extends State<ToDO1> {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => ToDo2()));
                   },
-                  child: Text(
-                    "ADD",
-                    style: TextStyle(
-                        color: const Color.fromARGB(255, 122, 159, 221),
-                        fontSize: 20),
-                  )),
+                  child: Icon(Icons.arrow_forward_ios_outlined,size:25,color: Colors.black,)
+                  ),
             ));
   }
 }
